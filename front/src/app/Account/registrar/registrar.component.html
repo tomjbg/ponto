@@ -1,0 +1,52 @@
+<div style="width: 1000px; margin: 0 auto;">
+  Form value: {{ registrarForm.value | json }}
+  <br />
+  Form Status: {{ registrarForm.valid | json }}
+</div>
+<br /><br /><br />
+
+<form [formGroup]='registrarForm' novalidate style="width: 400px;margin: 0 auto;">
+  <fieldset class="form-group">
+    <label for="username">Username</label>
+    <input type="text" class="form-control"  formControlName="username" autocomplete="off" />
+<div *ngIf="username.invalid && username.touched" >
+    <p class="text-danger" *ngIf="username.errors?.required">
+        Este campo é obrigatório
+    </p>
+    <p class="text-danger" *ngIf="username.errors?.minlength">
+        Deve ter no mínimo 4 caracteres
+    </p>
+  </div>
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" name="password" formControlName="password" autocomplete="off" />
+<div *ngIf="password.invalid && password.touched" >
+    <p class="text-danger" *ngIf="password.errors?.minlength">
+      Deve ter no mínimo 6 caracteres
+    </p>
+    <p class="text-danger" *ngIf="password.errors?.required">
+      Este campo é obrigatório
+    </p>
+  </div>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label for="confirmPassword">Confirm password</label>
+    <input type="password" class="form-control" formControlName="confirmPassword" autocomplete="off" />
+    <div *ngIf="confirmPassword.invalid && confirmPassword.touched" >
+    <p class="text-danger" *ngIf="confirmPassword.errors?.minlength">
+        Deve ter no mínimo 6 caracteres
+      </p>
+      <p class="text-danger" *ngIf="confirmPassword.errors?.required">
+        Este campo é obrigatório
+      </p>
+    </div>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <button (click)="cadastrar()" [disabled]="registrarForm.invalid" class="btn btn-success">
+      Cadastrar
+    </button>
+  </fieldset>
+</form>
